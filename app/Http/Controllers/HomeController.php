@@ -23,31 +23,22 @@ class HomeController extends Controller
      */
     public function home()
     {
-        return view('homecustomer');
-    }
-
-    public function homekaryawan()
-    {
-        return view('homekaryawan');
-    }
-
-    public function homeadmin()
-    {
-        return view('homeadmin');
+        return view('home');
     }
 
 
-    public function users()
-    {
-
-      if (Auth::user()->akses == "3") {
-        $user = User::where('akses', '=', '1')->get();
-        return $user;
-      }else {
-        $user = User::where('akses', '=', '3')->get();
-        // $user = DB::table('users')->where('akses', 3)->first();
-        return $user;
-      }
-
-    }
+    // public function users()
+    // {
+    //
+    //   if (Auth::user()->type == "1") {
+    //     $user = User::where('akses', '=', '1')->get();
+    //     return $user;
+    //   }elseif (Auth::user()->type == "2") {
+    //     $user = User::where('akses', '=', '2')->get();
+    //     return $user;
+    //   }
+    //     $user = User::where('akses', '=', '3')->get();
+    //     return $user;
+    //
+    // }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -39,26 +40,26 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    public function login(Request $request){
-
-      if (Auth::attempt([
-        'email' => $request->email,
-        'password' =>$request->password
-        ]))
-      {
-
-          $user = User::where('email', $request->email)->first();
-
-          if ($user->akses == 1) {
-            return redirect()->route('home');
-          }elseif ($user->akses == 2) {
-            return redirect()->route('homekaryawan');
-          }else {
-            return redirect()->route('homeadmin');
-          }
-
-      }
-      return redirect()->back();
-
-    }
+    // public function login(Request $request){
+    //
+    //   if (Auth::attempt([
+    //     'email' => $request->email,
+    //     'password' =>$request->password
+    //     ]))
+    //   {
+    //
+    //       $user = User::where('email', $request->email)->first();
+    //
+    //       if ($user->type == 1) {
+    //         return redirect()->route('home');
+    //       }elseif ($user->type == 2) {
+    //         return redirect()->route('homekaryawan');
+    //       }else {
+    //         return redirect()->route('homeadmin');
+    //       }
+    //
+    //   }
+    //   return redirect()->back();
+    //
+    // }
 }

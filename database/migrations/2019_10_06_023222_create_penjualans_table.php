@@ -17,8 +17,8 @@ class CreatePenjualansTable extends Migration
             $table->bigIncrements('id');
             $table->integer('user_id')->unsigned();
             $table->string('name');
-            $table->timestamps('tgl_pemesanan');
-            $table->date('created_at');
+            $table->timestamps();
+            $table->date('tglpengambilan');
             $table->integer('jumlah');
         });
     }
