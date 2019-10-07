@@ -107,13 +107,15 @@
           </a>
         </li>
         <li>
-          <a href="transaksi">
+
             @if(Auth::user()->type == '1')
-            <i class="fa fa-edit"></i> <span>Pembelian</span>
+            <!-- <i class="fa fa-edit"></i> <span>Pembelian</span> -->
             @else
+            <a href="transaksi">
             <i class="fa fa-edit"></i> <span>Penjualan</span>
+            </a>
             @endif
-          </a>
+
         </li>
       </ul>
     </section>
