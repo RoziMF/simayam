@@ -41,13 +41,15 @@ class PenjualanController extends Controller
       $this->validate($request,[
             'nama'=>'required',
             'ambil'=>'required',
-            'qty'=>'required'
+            'qty'=>'required',
+            'harga'=>'required'
         ]);
 
         Penjualan::create([
       		'name' => $request->nama,
       		'tglpengambilan' => $request->ambil,
-          'jumlah' => $request->qty
+          'kuantitas' => $request->qty,
+          'harga' =>$request->harga
       	]);
 
        return redirect('penjualan')->with('success', 'Data penjualan telah ditambahkan');
@@ -88,7 +90,8 @@ class PenjualanController extends Controller
         $penjualan = Penjualan::findOrFail($id);
         $penjualan->name = $request->input('nama');
         $penjualan->tglpengambilan = $request->input('ambil');
-        $penjualan->jumlah = $request->input('qty');
+        $penjualan->kuantitas = $request->input('qty');
+        $penjualan->harga = $request->input('harga');
         $penjualan->save();
         return redirect('penjualan');
     }

@@ -18,11 +18,12 @@
   <div class="box-body">
     @if($penjualan->id > 0)
     <form class="form-horizontal" method="post" action="{{ route('penjualan.update', $penjualan->id) }}">
+      @csrf
+      @method('PUT')
     @else
     <form class="form-horizontal" method="post" action="{{ route('penjualan.store') }}">
-    @endif
       @csrf
-        @method('PUT')
+    @endif
             <div class="box-body">
               <div class="form-group">
                 <label for="inputNama" class="col-sm-3 control-label">Nama Lengkap</label>
@@ -39,10 +40,17 @@
                 </div>
               </div>
               <div class="form-group">
-                <label for="inputjumlah" class="col-sm-3 control-label">Jumlah</label>
+                <label for="inputjumlah" class="col-sm-3 control-label">Kuantitas</label>
 
                 <div class="col-sm-6">
-                  <input type="text" class="form-control" value="{{ $penjualan->jumlah }}" name="qty" placeholder="Jumlah">
+                  <input type="text" class="form-control" value="{{ $penjualan->kuantitas }}" name="qty" placeholder="Kuantitas">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputharga" class="col-sm-3 control-label">Harga</label>
+
+                <div class="col-sm-6">
+                  <input type="text" class="form-control" value="{{ $penjualan->harga }}" name="harga" placeholder="Kuantitas">
                 </div>
               </div>
 
