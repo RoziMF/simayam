@@ -56,7 +56,6 @@
 
             <!-- /.box-body -->
             <div class="box-footer col-sm-offset-7 col-sm-2">
-              <button type="submit" class="btn btn-default">Batal</button>
               <button type="submit" class="btn btn-info pull-right">Simpan</button>
             </div>
             <!-- /.box-footer -->

@@ -102,7 +102,7 @@
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
         <li>
-          <a href="home">
+          <a href="{{ route('home') }}">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
           </a>
         </li>
@@ -111,7 +111,7 @@
             @if(Auth::user()->type == '1')
             <!-- <i class="fa fa-edit"></i> <span>Pembelian</span> -->
             @else
-            <a href="transaksi">
+            <a href="{{ route('penjualan') }}">
             <i class="fa fa-edit"></i> <span>Penjualan</span>
             </a>
             @endif
