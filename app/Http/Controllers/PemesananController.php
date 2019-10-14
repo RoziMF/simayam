@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Penjualan;
+use Auth;
+use App\Pemesanan;
 use Illuminate\Http\Request;
 
-class PenjualanController extends Controller
+class PemesananController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +15,11 @@ class PenjualanController extends Controller
      */
     public function index()
     {
-      $penjualan = Penjualan::all();
-      return view('penjualan', ['penjualan' => $penjualan]);
+      $id = Auth::id();
+      $users = \App\User::all();
+      $pemesanan = Pemesanan::all();
+      $pemesanan2 = Pemesanan::where('user_id', '=', $id)->get();
+      return view('pemesanan', ['pemesanan' => $pemesanan, 'pemesanan2' => $pemesanan2, 'user' => $users]);
     }
 
     /**
@@ -25,9 +29,9 @@ class PenjualanController extends Controller
      */
     public function create()
     {
-        return view('form_penjualan', [
-          'penjualan' => new Penjualan(),
-        ]);
+      return view('form_pemesanan', [
+        'pemesanan' => new Pemesanan(),
+      ]);
     }
 
     /**
@@ -39,20 +43,22 @@ class PenjualanController extends Controller
     public function store(Request $request)
     {
       $this->validate($request,[
-            'nama'=>'required',
-            'ambil'=>'required',
+            'userID'=>'required',
+            'alamat'=>'required',
+            'kirim'=>'required',
             'qty'=>'required',
             'harga'=>'required'
         ]);
 
-        Penjualan::create([
-      		'nama' => $request->nama,
-      		'tglpengambilan' => $request->ambil,
+        Pemesanan::create([
+          'user_id' => $request->userID,
+          'alamat' => $request->alamat,
+          'tglkirim' => $request->kirim,
           'kuantitas' => $request->qty,
           'harga' =>$request->harga
-      	]);
+        ]);
 
-       return redirect('penjualan')->with('success', 'Data penjualan telah ditambahkan');
+       return redirect('pemesanan')->with('success', 'Data pemesanan telah ditambahkan');
     }
 
     /**
@@ -74,8 +80,8 @@ class PenjualanController extends Controller
      */
     public function edit($id)
     {
-        $penjualan = Penjualan::findOrFail($id);
-        return view('form_penjualan', ['penjualan' => $penjualan]);
+      $pemesanan = Pemesanan::findOrFail($id);
+      return view('form_pemesanan', ['pemesanan' => $pemesanan]);
     }
 
     /**
@@ -87,13 +93,13 @@ class PenjualanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $penjualan = Penjualan::findOrFail($id);
-        $penjualan->nama = $request->input('nama');
-        $penjualan->tglpengambilan = $request->input('ambil');
-        $penjualan->kuantitas = $request->input('qty');
-        $penjualan->harga = $request->input('harga');
-        $penjualan->save();
-        return redirect('penjualan');
+      $pemesanan = Pemesanan::findOrFail($id);
+      $pemesanan->alamat = $request->input('alamat');
+      $pemesanan->tglkirim = $request->input('kirim');
+      $pemesanan->kuantitas = $request->input('qty');
+      $pemesanan->harga = $request->input('harga');
+      $pemesanan->save();
+      return redirect('pemesanan');
     }
 
     /**
@@ -106,15 +112,4 @@ class PenjualanController extends Controller
     {
         //
     }
-
-    // public function route()
-    // {
-    //     return view('penjualan');
-    // }
-
-    // public function penjualan()
-    // {
-    //     $penjualan=\App\Penjualan::all();
-    //     return view('penjualan',compact('penjualans'));
-    // }
 }

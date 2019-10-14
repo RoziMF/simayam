@@ -117,6 +117,13 @@
             @endif
 
         </li>
+
+        <li>
+          <a href="{{ route('pemesanan.index') }}">
+            <i class="fa fa-edit"></i> <span>Pemesanan</span>
+          </a>
+        </li>
+
       </ul>
     </section>
     <!-- /.sidebar -->

@@ -50,7 +50,7 @@
                 @foreach($penjualan as $key=>$value)
                 <tr>
                   <td>{{$value->id}}</td>
-                  <td>{{$value->name}}</td>
+                  <td>{{$value->nama}}</td>
                   <td>{{$value->created_at}}</td>
                   <td>{{$value->tglpengambilan}}</td>
                   <td>{{$value->kuantitas}}</td>
