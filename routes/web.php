@@ -24,3 +24,9 @@ Route::resource('penjualan','PenjualanController');
 
 // Route::get('/pemesanan', 'PemesananController@index')->name('pemesanan');
 Route::resource('pemesanan','PemesananController');
+
+Route::resource('harga','HargaController');
+
+// Route::put('/harga', 'HargaController@update')->name('harga');
+// Route::get('/form_harga', 'HargaController@form');
+// Route::put('/harga/proses', 'HargaController@proses');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Auth;
 use App\Pemesanan;
+use App\Harga;
 use Illuminate\Http\Request;
 
 class PemesananController extends Controller
@@ -17,9 +18,10 @@ class PemesananController extends Controller
     {
       $id = Auth::id();
       $users = \App\User::all();
+      $harga = Harga::all();
       $pemesanan = Pemesanan::all();
       $pemesanan2 = Pemesanan::where('user_id', '=', $id)->get();
-      return view('pemesanan', ['pemesanan' => $pemesanan, 'pemesanan2' => $pemesanan2, 'user' => $users]);
+      return view('pemesanan', ['pemesanan' => $pemesanan, 'pemesanan2' => $pemesanan2, 'user' => $users, 'harga' => $harga]);
     }
 
     /**
@@ -46,16 +48,16 @@ class PemesananController extends Controller
             'userID'=>'required',
             'alamat'=>'required',
             'kirim'=>'required',
-            'qty'=>'required',
-            'harga'=>'required'
+            'qty'=>'required'
+            // 'harga'=>'required'
         ]);
 
         Pemesanan::create([
           'user_id' => $request->userID,
           'alamat' => $request->alamat,
           'tglkirim' => $request->kirim,
-          'kuantitas' => $request->qty,
-          'harga' =>$request->harga
+          'kuantitas' => $request->qty
+          // 'harga' =>$request->harga
         ]);
 
        return redirect('pemesanan')->with('success', 'Data pemesanan telah ditambahkan');
