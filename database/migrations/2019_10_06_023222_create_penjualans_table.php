@@ -15,7 +15,7 @@ class CreatePenjualansTable extends Migration
     {
         Schema::create('penjualans', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
+            $table->string('nama');
             $table->timestamps();
             $table->date('tglpengambilan');
             $table->integer('harga');
