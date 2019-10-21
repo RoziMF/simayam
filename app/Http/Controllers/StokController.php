@@ -40,8 +40,7 @@ class StokController extends Controller
     {
       $this->validate($request,[
             'kandang'=>'required',
-            'jmlayam'=>'required',
-            'keterangan'=>'required'
+            'jmlayam'=>'required'
         ]);
 
         Stok::create([

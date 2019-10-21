@@ -38,16 +38,25 @@
                 <tr>
                   <th>Kandang</th>
                   <th>Jumlah Ayam</th>
+                  @if(Auth::user()->type == '1')
+
+                  @else
                   <th>Keterangan</th>
                   <th>Option</th>
+                  @endif
                 </tr>
 
                 @foreach($stok as $key=>$value)
                 <tr>
                   <td>{{$value->kandang}}</td>
                   <td>{{$value->jmlayam}}</td>
+
+                  @if(Auth::user()->type == '1')
+
+                  @else
                   <td>{{$value->keterangan}}</td>
                   <td><a href="{{ route('stok.edit', $value->id)}}" class="btn btn-warning">Edit</a></td>
+                  @endif
                 @endforeach
               </table>
             </div>
