@@ -37,7 +37,7 @@
                 <label for="tanggalPengambilan" class="col-sm-3 control-label">Tanggal Pengiriman</label>
 
                 <div class="col-sm-6">
-                  <input type="date" class="form-control" value="{{ $pemesanan->tglkirim }}" name="kirim" placeholder="Tanggal">
+                  <input type="date" class="form-control" value="{{ $pemesanan->tglkirim }}" name="kirim" placeholder="Tanggal Kirim">
                 </div>
               </div>
               <div class="form-group">
@@ -51,7 +51,7 @@
                 <label for="inputharga" class="col-sm-3 control-label">Harga</label>
 
                 <div class="col-sm-6">
-                  <input type="text" class="form-control" value="{{$pemesanan->harga}}" name="harga">
+                  <input type="text" class="form-control" value="{{$pemesanan->harga}}" name="harga" placeholder="Harga">
                 </div>
               </div>
 

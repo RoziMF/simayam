@@ -106,6 +106,13 @@
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
           </a>
         </li>
+
+        <li>
+          <a href="{{ route('stok.index') }}">
+            <i class="fa fa-edit"></i> <span>Stok Ayam</span>
+          </a>
+        </li>
+
         <li>
 
             @if(Auth::user()->type == '1')

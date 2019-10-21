@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Auth;
-use App\Pemesanan;
-use App\Harga;
+use App\Stok;
 use Illuminate\Http\Request;
 
-class PemesananController extends Controller
+class StokController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,12 +14,8 @@ class PemesananController extends Controller
      */
     public function index()
     {
-      $id = Auth::id();
-      $users = \App\User::all();
-      $harga = Harga::all();
-      $pemesanan = Pemesanan::all();
-      $pemesanan2 = Pemesanan::where('user_id', '=', $id)->get();
-      return view('pemesanan', ['pemesanan' => $pemesanan, 'pemesanan2' => $pemesanan2, 'user' => $users, 'harga' => $harga]);
+        $stok = Stok::all();
+        return view('stok', ['stok' => $stok]);
     }
 
     /**
@@ -31,8 +25,8 @@ class PemesananController extends Controller
      */
     public function create()
     {
-      return view('form_pemesanan', [
-        'pemesanan' => new Pemesanan(),
+      return view('form_stok', [
+        'stok' => new Stok(),
       ]);
     }
 
@@ -45,22 +39,18 @@ class PemesananController extends Controller
     public function store(Request $request)
     {
       $this->validate($request,[
-            'userID'=>'required',
-            'alamat'=>'required',
-            'kirim'=>'required',
-            'qty'=>'required',
-            'harga'=>'required'
+            'kandang'=>'required',
+            'jmlayam'=>'required',
+            'keterangan'=>'required'
         ]);
 
-        Pemesanan::create([
-          'user_id' => $request->userID,
-          'alamat' => $request->alamat,
-          'tglkirim' => $request->kirim,
-          'kuantitas' => $request->qty,
-          'harga' =>$request->harga
+        Stok::create([
+          'kandang' => $request->kandang,
+          'jmlayam' => $request->jmlayam,
+          'keterangan' => $request->keterangan
         ]);
 
-       return redirect('pemesanan')->with('success', 'Data pemesanan telah ditambahkan');
+       return redirect('stok')->with('success', 'Data stok telah ditambahkan');
     }
 
     /**
@@ -82,8 +72,8 @@ class PemesananController extends Controller
      */
     public function edit($id)
     {
-      $pemesanan = Pemesanan::findOrFail($id);
-      return view('form_pemesanan', ['pemesanan' => $pemesanan]);
+      $stok = Stok::findOrFail($id);
+      return view('form_stok', ['stok' => $stok]);
     }
 
     /**
@@ -95,13 +85,12 @@ class PemesananController extends Controller
      */
     public function update(Request $request, $id)
     {
-      $pemesanan = Pemesanan::findOrFail($id);
-      $pemesanan->alamat = $request->input('alamat');
-      $pemesanan->tglkirim = $request->input('kirim');
-      $pemesanan->kuantitas = $request->input('qty');
-      $pemesanan->harga = $request->input('harga');
-      $pemesanan->save();
-      return redirect('pemesanan');
+      $stok = Stok::findOrFail($id);
+      $stok->kandang = $request->input('kandang');
+      $stok->jmlayam = $request->input('jmlayam');
+      $stok->keterangan = $request->input('keterangan');
+      $stok->save();
+      return redirect('stok');
     }
 
     /**

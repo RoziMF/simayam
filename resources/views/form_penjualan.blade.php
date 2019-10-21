@@ -50,7 +50,7 @@
                 <label for="inputharga" class="col-sm-3 control-label">Harga</label>
 
                 <div class="col-sm-6">
-                  <input type="text" class="form-control" value="{{ $penjualan->harga }}" name="harga" placeholder="Kuantitas">
+                  <input type="text" class="form-control" value="{{ $penjualan->harga }}" name="harga" placeholder="Harga">
                 </div>
               </div>
 

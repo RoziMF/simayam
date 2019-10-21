@@ -27,6 +27,8 @@ Route::resource('pemesanan','PemesananController');
 
 Route::resource('harga','HargaController');
 
+Route::resource('stok','StokController');
+
 // Route::put('/harga', 'HargaController@update')->name('harga');
 // Route::get('/form_harga', 'HargaController@form');
 // Route::put('/harga/proses', 'HargaController@proses');
