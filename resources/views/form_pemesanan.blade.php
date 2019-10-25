@@ -16,6 +16,17 @@
     </div>
   </div>
   <div class="box-body">
+
+    @if (count($errors) > 0)
+    <div class="alert alert-danger">
+        <ul>
+             @foreach ($errors->all() as $error)
+              <li>{{ $error }}</li>
+             @endforeach
+        </ul>
+    </div>
+    @endif
+
     @if($pemesanan->id > 0)
     <form class="form-horizontal" method="post" action="{{ route('pemesanan.update', $pemesanan->id) }}">
       @csrf
@@ -37,16 +48,17 @@
                 <label for="tanggalPengambilan" class="col-sm-3 control-label">Tanggal Pengiriman</label>
 
                 <div class="col-sm-6">
-                  <input type="date" class="form-control" value="{{ $pemesanan->tglkirim }}" name="kirim" placeholder="Tanggal Kirim">
+                  <input type="date" class="form-control" value="{{ $pemesanan->tglkirim }}" name="tgl_kirim" placeholder="Tanggal Kirim">
                 </div>
               </div>
               <div class="form-group">
                 <label for="inputjumlah" class="col-sm-3 control-label">Kuantitas</label>
 
                 <div class="col-sm-6">
-                  <input type="text" class="form-control" value="{{ $pemesanan->kuantitas }}" name="qty" placeholder="Kuantitas">
+                  <input type="text" class="form-control" value="{{ $pemesanan->kuantitas }}" name="kuantitas" placeholder="Kuantitas">
                 </div>
               </div>
+          @if($pemesanan->id > 0)
               <div class="form-group">
                 <label for="inputharga" class="col-sm-3 control-label">Harga</label>
 
@@ -54,6 +66,15 @@
                   <input type="text" class="form-control" value="{{$pemesanan->harga}}" name="harga" placeholder="Harga">
                 </div>
               </div>
+          @else
+          <div class="form-group">
+            <label for="inputharga" class="col-sm-3 control-label">Harga</label>
+
+            <div class="col-sm-6">
+              <input type="text" class="form-control" value="{{$harga[0]->harga}}" name="harga" placeholder="Harga" readonly>
+            </div>
+          </div>
+          @endif
 
             <!-- /.box-body -->
             <div class="box-footer col-sm-offset-7 col-sm-2">

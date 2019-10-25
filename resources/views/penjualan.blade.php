@@ -44,6 +44,7 @@
                   <th>Tanggal Pengambilan</th>
                   <th>Jumlah</th>
                   <th>Harga</th>
+                  <th>Total Harga</th>
                   <th>Option</th>
                 </tr>
 
@@ -54,7 +55,8 @@
                   <td>{{$value->created_at}}</td>
                   <td>{{$value->tglpengambilan}}</td>
                   <td>{{$value->kuantitas}}</td>
-                  <td>{{$value->harga}}</td>
+                  <td>@currency($value->harga)</td>
+                  <td>@currency($value->kuantitas*$value->harga)</td>
                   <td><a href="{{ route('penjualan.edit', $value->id)}}" class="btn btn-warning">Edit</a></td>
                 @endforeach
               </table>

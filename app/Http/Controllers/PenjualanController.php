@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Penjualan;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class PenjualanController extends Controller
@@ -25,8 +26,10 @@ class PenjualanController extends Controller
      */
     public function create()
     {
+        $harga = DB::table('hargas')->select('harga')->get();
         return view('form_penjualan', [
           'penjualan' => new Penjualan(),
+          'harga' => $harga,
         ]);
     }
 
@@ -38,17 +41,23 @@ class PenjualanController extends Controller
      */
     public function store(Request $request)
     {
+      $messages = [
+        'required' => ':attribute tidak boleh kosong!',
+        'min' => ':attribute terlalu kecil!',
+        'numeric' => ':attribute harus diisi angka!!!',
+      ];
+
       $this->validate($request,[
             'nama'=>'required',
-            'ambil'=>'required',
-            'qty'=>'required',
-            'harga'=>'required'
-        ]);
+            'tgl_ambil'=>'required',
+            'kuantitas'=>'required|min:1|numeric',
+            'harga'=>'required|min:1|numeric'
+        ],$messages);
 
         Penjualan::create([
       		'nama' => $request->nama,
-      		'tglpengambilan' => $request->ambil,
-          'kuantitas' => $request->qty,
+      		'tglpengambilan' => $request->tgl_ambil,
+          'kuantitas' => $request->kuantitas,
           'harga' =>$request->harga
       	]);
 
@@ -89,8 +98,8 @@ class PenjualanController extends Controller
     {
         $penjualan = Penjualan::findOrFail($id);
         $penjualan->nama = $request->input('nama');
-        $penjualan->tglpengambilan = $request->input('ambil');
-        $penjualan->kuantitas = $request->input('qty');
+        $penjualan->tglpengambilan = $request->input('tgl_ambil');
+        $penjualan->kuantitas = $request->input('kuantitas');
         $penjualan->harga = $request->input('harga');
         $penjualan->save();
         return redirect('penjualan');

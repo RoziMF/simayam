@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Auth;
 use App\Pemesanan;
 use App\Harga;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class PemesananController extends Controller
@@ -18,10 +19,9 @@ class PemesananController extends Controller
     {
       $id = Auth::id();
       $users = \App\User::all();
-      $harga = Harga::all();
       $pemesanan = Pemesanan::all();
       $pemesanan2 = Pemesanan::where('user_id', '=', $id)->get();
-      return view('pemesanan', ['pemesanan' => $pemesanan, 'pemesanan2' => $pemesanan2, 'user' => $users, 'harga' => $harga]);
+      return view('pemesanan', ['pemesanan' => $pemesanan, 'pemesanan2' => $pemesanan2, 'user' => $users]);
     }
 
     /**
@@ -31,8 +31,10 @@ class PemesananController extends Controller
      */
     public function create()
     {
+      $harga = DB::table('hargas')->select('harga')->get();
       return view('form_pemesanan', [
         'pemesanan' => new Pemesanan(),
+        'harga' => $harga,
       ]);
     }
 
@@ -44,19 +46,25 @@ class PemesananController extends Controller
      */
     public function store(Request $request)
     {
+      $messages = [
+        'required' => ':attribute tidak boleh kosong!',
+        'min' => ':attribute terlalu kecil!',
+        'numeric' => ':attribute harus diisi angka!!!',
+      ];
+
       $this->validate($request,[
             'userID'=>'required',
             'alamat'=>'required',
-            'kirim'=>'required',
-            'qty'=>'required',
-            'harga'=>'required'
-        ]);
+            'tgl_kirim'=>'required',
+            'kuantitas'=>'required|numeric|min:1',
+            'harga'=>'required|numeric|min:1'
+        ],$messages);
 
         Pemesanan::create([
           'user_id' => $request->userID,
           'alamat' => $request->alamat,
-          'tglkirim' => $request->kirim,
-          'kuantitas' => $request->qty,
+          'tglkirim' => $request->tgl_kirim,
+          'kuantitas' => $request->kuantitas,
           'harga' =>$request->harga
         ]);
 
@@ -97,8 +105,8 @@ class PemesananController extends Controller
     {
       $pemesanan = Pemesanan::findOrFail($id);
       $pemesanan->alamat = $request->input('alamat');
-      $pemesanan->tglkirim = $request->input('kirim');
-      $pemesanan->kuantitas = $request->input('qty');
+      $pemesanan->tglkirim = $request->input('tgl_kirim');
+      $pemesanan->kuantitas = $request->input('kuantitas');
       $pemesanan->harga = $request->input('harga');
       $pemesanan->save();
       return redirect('pemesanan');
