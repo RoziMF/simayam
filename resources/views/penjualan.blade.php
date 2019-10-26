@@ -31,6 +31,8 @@
       </div>
 
     </div>
+
+    @if(Auth::user()->type == '2')
     <div class="box-body">
       <div class="row">
         <div class="col-xs-12">
@@ -38,8 +40,8 @@
             <div class="box-body table-responsive no-padding">
               <table class="table table-hover">
                 <tr>
-                  <th>ID</th>
-                  <th>Nama Lengkap</th>
+                  <th>Nama Karyawan</th>
+                  <th>Nama Customer</th>
                   <th>Tanggal Pembelian</th>
                   <th>Tanggal Pengambilan</th>
                   <th>Jumlah</th>
@@ -48,9 +50,9 @@
                   <th>Option</th>
                 </tr>
 
-                @foreach($penjualan as $key=>$value)
+                @foreach($penjualan2 as $key=>$value)
                 <tr>
-                  <td>{{$value->id}}</td>
+                  <td>{{$value->user->name}}</td>
                   <td>{{$value->nama}}</td>
                   <td>{{$value->created_at}}</td>
                   <td>{{$value->tglpengambilan}}</td>
@@ -66,6 +68,48 @@
           <!-- /.box -->
         </div>
       </div>
+
+      @elseif(Auth::user()->type == '3')
+      <div class="box-body">
+        <div class="row">
+          <div class="col-xs-12">
+              <!-- /.box-header -->
+              <div class="box-body table-responsive no-padding">
+                <table class="table table-hover">
+                  <tr>
+                    <th>Nama Karyawan</th>
+                    <th>Nama Customer</th>
+                    <th>Tanggal Pembelian</th>
+                    <th>Tanggal Pengambilan</th>
+                    <th>Jumlah</th>
+                    <th>Harga</th>
+                    <th>Total Harga</th>
+                    <th>Option</th>
+                  </tr>
+
+                  @foreach($penjualan as $key=>$value)
+                  <tr>
+                    <td>{{$value->user->name}}</td>
+                    <td>{{$value->nama}}</td>
+                    <td>{{$value->created_at}}</td>
+                    <td>{{$value->tglpengambilan}}</td>
+                    <td>{{$value->kuantitas}}</td>
+                    <td>@currency($value->harga)</td>
+                    <td>@currency($value->kuantitas*$value->harga)</td>
+                    <td><a href="{{ route('penjualan.edit', $value->id)}}" class="btn btn-warning">Edit</a></td>
+                  @endforeach
+                </table>
+              </div>
+              <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+          </div>
+        </div>
+
+      @else
+
+      @endif
+
     </div>
     <!-- /.box-body -->
 

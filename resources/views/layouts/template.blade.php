@@ -108,6 +108,18 @@
         </li>
 
         <li>
+
+            @if(Auth::user()->type == '3')
+            <a href="{{ route('harga.index') }}">
+            <i class="fa fa-edit"></i> <span>Atur Harga Ayam</span>
+            </a>
+            @else
+
+            @endif
+
+        </li>
+
+        <li>
           <a href="{{ route('stok.index') }}">
             <i class="fa fa-edit"></i> <span>Stok Ayam</span>
           </a>

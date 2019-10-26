@@ -37,6 +37,20 @@
     @endif
             <div class="box-body">
               <input type="hidden" class="form-control" value="{{ Auth::user()->id }}" name="userID">
+
+              <div class="form-group">
+                <label for="inputNama" class="col-sm-3 control-label">Kandang</label>
+
+                <div class="col-sm-6">
+                  <select class="form-control" id="kandang" name="kandangID">
+                      <option value="null">Pilih Kandang</option>
+                      @foreach ($kandang as $key=>$value)
+                      <option value="{{ $value->id }}">{{ $value->kandang }}</option>
+                      @endforeach
+                    </select>
+                </div>
+              </div>
+
               <div class="form-group">
                 <label for="inputNama" class="col-sm-3 control-label">Alamat</label>
 
@@ -44,6 +58,7 @@
                   <input type="text" class="form-control" value="{{ $pemesanan->alamat }}" name="alamat" placeholder="Masukkan Alamat">
                 </div>
               </div>
+
               <div class="form-group">
                 <label for="tanggalPengambilan" class="col-sm-3 control-label">Tanggal Pengiriman</label>
 

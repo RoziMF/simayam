@@ -38,10 +38,16 @@ class StokController extends Controller
      */
     public function store(Request $request)
     {
+      $messages = [
+        'required' => ':attribute tidak boleh kosong!',
+        'min' => ':attribute terlalu kecil!',
+        'numeric' => ':attribute harus diisi angka!!!',
+      ];
+
       $this->validate($request,[
             'kandang'=>'required',
             'jmlayam'=>'required'
-        ]);
+        ], $messages);
 
         Stok::create([
           'kandang' => $request->kandang,

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Auth;
 use App\Pemesanan;
 use App\Harga;
+use App\Stok;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
@@ -31,10 +32,12 @@ class PemesananController extends Controller
      */
     public function create()
     {
+      $kandang = \App\Stok::all();
       $harga = DB::table('hargas')->select('harga')->get();
       return view('form_pemesanan', [
         'pemesanan' => new Pemesanan(),
         'harga' => $harga,
+        'kandang' => $kandang,
       ]);
     }
 
@@ -54,6 +57,7 @@ class PemesananController extends Controller
 
       $this->validate($request,[
             'userID'=>'required',
+            'kandangID'=>'required',
             'alamat'=>'required',
             'tgl_kirim'=>'required',
             'kuantitas'=>'required|numeric|min:1',
@@ -65,8 +69,13 @@ class PemesananController extends Controller
           'alamat' => $request->alamat,
           'tglkirim' => $request->tgl_kirim,
           'kuantitas' => $request->kuantitas,
-          'harga' =>$request->harga
+          'harga' =>$request->harga,
+          'kandang_id' => $request->kandangID
         ]);
+
+        $stok = Stok::findOrFail($request->kandangID);
+        $stok->jmlayam = $stok->jmlayam - $request->kuantitas;
+        $stok->save();
 
        return redirect('pemesanan')->with('success', 'Data pemesanan telah ditambahkan');
     }

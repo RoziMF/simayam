@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Auth;
 use App\Penjualan;
+use App\Stok;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
@@ -15,8 +17,11 @@ class PenjualanController extends Controller
      */
     public function index()
     {
+      $id = Auth::id();
+      $users = \App\User::all();
       $penjualan = Penjualan::all();
-      return view('penjualan', ['penjualan' => $penjualan]);
+      $penjualan2 = Penjualan::where('user_id', '=', $id)->get();
+      return view('penjualan', ['penjualan' => $penjualan, 'penjualan2' => $penjualan2, 'user' => $users]);
     }
 
     /**
@@ -26,10 +31,12 @@ class PenjualanController extends Controller
      */
     public function create()
     {
+        $kandang = \App\Stok::all();
         $harga = DB::table('hargas')->select('harga')->get();
         return view('form_penjualan', [
           'penjualan' => new Penjualan(),
           'harga' => $harga,
+          'kandang' => $kandang,
         ]);
     }
 
@@ -48,6 +55,8 @@ class PenjualanController extends Controller
       ];
 
       $this->validate($request,[
+            'userID'=>'required',
+            'kandangID'=>'required',
             'nama'=>'required',
             'tgl_ambil'=>'required',
             'kuantitas'=>'required|min:1|numeric',
@@ -55,11 +64,17 @@ class PenjualanController extends Controller
         ],$messages);
 
         Penjualan::create([
+          'user_id' => $request->userID,
       		'nama' => $request->nama,
       		'tglpengambilan' => $request->tgl_ambil,
           'kuantitas' => $request->kuantitas,
-          'harga' =>$request->harga
+          'harga' =>$request->harga,
+          'kandang_id' => $request->kandangID
       	]);
+
+        $stok = Stok::findOrFail($request->kandangID);
+        $stok->jmlayam = $stok->jmlayam - $request->kuantitas;
+        $stok->save();
 
        return redirect('penjualan')->with('success', 'Data penjualan telah ditambahkan');
     }

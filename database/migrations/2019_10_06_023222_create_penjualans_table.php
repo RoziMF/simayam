@@ -20,6 +20,8 @@ class CreatePenjualansTable extends Migration
             $table->date('tglpengambilan');
             $table->integer('harga');
             $table->integer('kuantitas');
+            $table->integer('user_id')->unsigned();
+            $table->integer('kandang_id')->unsigned();
         });
     }
 

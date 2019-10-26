@@ -22,6 +22,7 @@ class CreatePemesanansTable extends Migration
             $table->integer('kuantitas');
             $table->boolean('status')->default(0);
             $table->integer('user_id')->unsigned();
+            $table->integer('kandang_id')->unsigned();
         });
     }
 
