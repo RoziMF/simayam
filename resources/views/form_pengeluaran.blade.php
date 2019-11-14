@@ -5,7 +5,7 @@
 <!-- Default box -->
 <div class="box">
   <div class="box-header with-border">
-    <h3 class="box-title">Form Stok Ayam</h3>
+    <h3 class="box-title">Form Pengeluaran</h3>
 
     <div class="box-tools pull-right">
       <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip"
@@ -27,35 +27,22 @@
     </div>
     @endif
 
-    @if($stok->id > 0)
-    <form class="form-horizontal" method="post" action="{{ route('stok.update', $stok->id) }}">
+    <form class="form-horizontal" method="post" action="{{ route('pengeluaranStore') }}">
       @csrf
-      @method('PUT')
-    @else
-    <form class="form-horizontal" method="post" action="{{ route('stok.store') }}">
-      @csrf
-    @endif
+
             <div class="box-body">
               <div class="form-group">
-                <label for="inputNama" class="col-sm-3 control-label">Kandang</label>
+                <label for="inputharga" class="col-sm-3 control-label">Uang Keluar</label>
 
                 <div class="col-sm-6">
-                  <input type="text" class="form-control" value="{{ $stok->kandang }}" name="kandang" placeholder="Kandang">
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label for="inputjumlah" class="col-sm-3 control-label">Jumlah Ayam</label>
-
-                <div class="col-sm-6">
-                  <input type="text" class="form-control" value="{{ $stok->jmlayam }}" name="jml_ayam" placeholder="Masukkan Jumlah Ayam">
+                  <input type="text" class="form-control" placeholder="Masukkan Uang Keluar" name="uang_keluar">
                 </div>
               </div>
 
               <div class="form-group">
                   <label class="col-sm-3 control-label">Keterangan</label>
                   <div class="col-sm-6">
-                  <textarea class="form-control" rows="3" placeholder="Masukkan Keterangan" name="keterangan">{{ $stok->keterangan }}</textarea>
+                  <textarea class="form-control" rows="3" placeholder="Masukkan Keterangan" name="keterangan"></textarea>
                   </div>
               </div>
 

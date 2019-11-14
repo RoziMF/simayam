@@ -39,19 +39,19 @@ class StokController extends Controller
     public function store(Request $request)
     {
       $messages = [
-        'required' => ':attribute tidak boleh kosong!',
+        'required' => 'harap semua kolom diisi (:attribute)!',
         'min' => ':attribute terlalu kecil!',
-        'numeric' => ':attribute harus diisi angka!!!',
+        'numeric' => ':attribute harap diisi dengan data yang sesuai!',
       ];
 
       $this->validate($request,[
             'kandang'=>'required',
-            'jmlayam'=>'required'
+            'jml_ayam'=>'required|numeric'
         ], $messages);
 
         Stok::create([
           'kandang' => $request->kandang,
-          'jmlayam' => $request->jmlayam,
+          'jmlayam' => $request->jml_ayam,
           'keterangan' => $request->keterangan
         ]);
 
@@ -92,7 +92,7 @@ class StokController extends Controller
     {
       $stok = Stok::findOrFail($id);
       $stok->kandang = $request->input('kandang');
-      $stok->jmlayam = $request->input('jmlayam');
+      $stok->jmlayam = $request->input('jml_ayam');
       $stok->keterangan = $request->input('keterangan');
       $stok->save();
       return redirect('stok');

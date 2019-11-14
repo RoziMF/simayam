@@ -87,6 +87,7 @@
                   <th>Tanggal Pengiriman</th>
                   <th>Kuantitas</th>
                   <th>Harga</th>
+                  <th>Total Harga</th>
                   <th>Option</th>
                 </tr>
 
@@ -97,7 +98,8 @@
                   <td>{{$value->created_at}}</td>
                   <td>{{$value->tglkirim}}</td>
                   <td>{{$value->kuantitas}}</td>
-                  <td>{{$value->harga}}</td>
+                  <td>@currency($value->harga)</td>
+                  <td>@currency($value->kuantitas*$value->harga)</td>
                   <td><a href="{{ route('pemesanan.edit', $value->id)}}" class="btn btn-warning">Edit</a></td>
                 @endforeach
               </table>

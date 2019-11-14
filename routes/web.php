@@ -29,6 +29,17 @@ Route::resource('harga','HargaController');
 
 Route::resource('stok','StokController');
 
+//peramalan
+Route::get('/peramalan', 'PeramalanController@index')->name('peramalan');
+Route::post('/peramalan/store', 'PeramalanController@peramalan')->name('peramalan.store');
+Route::post('/peramalan_order/store', 'PeramalanController@peramalan0')->name('peramalan0.store');
+
+//keuangan
+Route::get('/keuangan', 'KeuanganController@index')->name('keuangan');
+Route::get('/pengeluaran/create', 'KeuanganController@pengeluaranCreate')->name('pengeluaranCreate');
+Route::post('/keuangan/store', 'KeuanganController@pengeluaranStore')->name('pengeluaranStore');
+
+
 // Route::put('/harga', 'HargaController@update')->name('harga');
 // Route::get('/form_harga', 'HargaController@form');
 // Route::put('/harga/proses', 'HargaController@proses');

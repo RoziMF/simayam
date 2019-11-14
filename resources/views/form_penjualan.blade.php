@@ -45,7 +45,11 @@
                   <select class="form-control" id="kandang" name="kandangID">
                       <option value="null">Pilih Kandang</option>
                       @foreach ($kandang as $key=>$value)
+                      @if ($value->id == $penjualan->kandang_id)
+                      <option value="{{ $value->id }}" selected>{{ $value->kandang }}</option>
+                      @else
                       <option value="{{ $value->id }}">{{ $value->kandang }}</option>
+                      @endif
                       @endforeach
                     </select>
                 </div>

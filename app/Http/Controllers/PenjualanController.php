@@ -98,8 +98,9 @@ class PenjualanController extends Controller
      */
     public function edit($id)
     {
+        $kandang = \App\Stok::all();
         $penjualan = Penjualan::findOrFail($id);
-        return view('form_penjualan', ['penjualan' => $penjualan]);
+        return view('form_penjualan', ['penjualan' => $penjualan,'kandang'=>$kandang]);
     }
 
     /**
@@ -112,6 +113,7 @@ class PenjualanController extends Controller
     public function update(Request $request, $id)
     {
         $penjualan = Penjualan::findOrFail($id);
+        $penjualan->kandang_id = $request->input('kandangID');
         $penjualan->nama = $request->input('nama');
         $penjualan->tglpengambilan = $request->input('tgl_ambil');
         $penjualan->kuantitas = $request->input('kuantitas');

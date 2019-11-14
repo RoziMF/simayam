@@ -99,8 +99,9 @@ class PemesananController extends Controller
      */
     public function edit($id)
     {
+      $kandang = \App\Stok::all();
       $pemesanan = Pemesanan::findOrFail($id);
-      return view('form_pemesanan', ['pemesanan' => $pemesanan]);
+      return view('form_pemesanan', ['pemesanan' => $pemesanan,'kandang'=>$kandang]);
     }
 
     /**
@@ -113,6 +114,7 @@ class PemesananController extends Controller
     public function update(Request $request, $id)
     {
       $pemesanan = Pemesanan::findOrFail($id);
+      // $pemesanan->kandang_id = $request->input('kandangID');
       $pemesanan->alamat = $request->input('alamat');
       $pemesanan->tglkirim = $request->input('tgl_kirim');
       $pemesanan->kuantitas = $request->input('kuantitas');
