@@ -21,9 +21,11 @@ Route::get('/home', 'HomeController@home')->name('home');
 
 Route::get('/transaksi', 'PenjualanController@index')->name('penjualan');
 Route::resource('penjualan','PenjualanController');
+Route::get('/cetak_pdf','PenjualanController@pdf')->name('pdf');
 
 // Route::get('/pemesanan', 'PemesananController@index')->name('pemesanan');
 Route::resource('pemesanan','PemesananController');
+Route::get('/cetak_pdf_order','PemesananController@pdf')->name('pdforder');
 
 Route::resource('harga','HargaController');
 
@@ -31,8 +33,8 @@ Route::resource('stok','StokController');
 
 //peramalan
 Route::get('/peramalan', 'PeramalanController@index')->name('peramalan');
-Route::post('/peramalan/store', 'PeramalanController@peramalan')->name('peramalan.store');
-Route::post('/peramalan_order/store', 'PeramalanController@peramalan0')->name('peramalan0.store');
+Route::get('/peramalan/store', 'PeramalanController@peramalan')->name('peramalan.store');
+Route::get('/peramalan_order/store', 'PeramalanController@peramalan0')->name('peramalan0.store');
 
 //keuangan
 Route::get('/keuangan', 'KeuanganController@index')->name('keuangan');

@@ -62,6 +62,32 @@
                   <td><a href="{{ route('penjualan.edit', $value->id)}}" class="btn btn-warning">Edit</a></td>
                 @endforeach
               </table>
+              <br>
+
+              <form class="form-horizontal" method="get" action="{{route('pdf')}}">
+                @csrf
+
+                      <div class="box-body" >
+                        <div class="row col-sm-12">
+
+                        <div class="form-group">
+                          <label for="inputharga" class="col-sm-2 control-label">Periode</label>
+
+                          <div class="col-sm-4">
+                            <input type="text" class="form-control" name="periode" placeholder="YYYY-MM" required>
+                          </div>
+
+                          <button type="submit" class="btn btn-primary pull-right">CETAK</button>
+                        </div>
+
+                        </div>
+
+                      <!-- /.box-body -->
+
+                      <!-- /.box-footer -->
+                      </div>
+                    </form>
+              <!-- <a href="{{route('pdf')}}" class="pull-right btn btn-primary">CETAK</a> -->
             </div>
             <!-- /.box-body -->
           </div>

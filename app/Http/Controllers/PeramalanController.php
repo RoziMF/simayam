@@ -98,7 +98,9 @@ class PeramalanController extends Controller
       $peramalan = ['hasil' => $hasil, 'beta' => $beta[$bestBetaIndex], 'mape' => $MAPE[$bestBetaIndex]];
       // $peramalan = ['hasil' => $hasil, 'beta' => $beta[$bestBetaIndex], 'mape' => $MAPE[$bestBetaIndex], 'produk' => $produk];
 
-      return response()->json($peramalan);
+      return response()->json($peramalan) ;
+
+
   }
 
 //PERAMALAN ORDER

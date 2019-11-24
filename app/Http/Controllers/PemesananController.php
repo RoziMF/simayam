@@ -8,6 +8,7 @@ use App\Harga;
 use App\Stok;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use PDF;
 
 class PemesananController extends Controller
 {
@@ -16,6 +17,19 @@ class PemesananController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     public function pdf(Request $request)
+     {
+       $periode = $request->periode;
+       $dateString = date('Y-m', strtotime($periode));
+     	 $pemesanan = Pemesanan::where(DB::raw("DATE_FORMAT(created_at, '%Y-%m') = $dateString"))
+      ->get();
+
+     	$pdf = PDF::loadview('pemesanan_pdf', ['pemesanan'=>$pemesanan, 'periode'=>$periode]);
+     	return $pdf->stream();
+     }
+
+
     public function index()
     {
       $id = Auth::id();

@@ -7,6 +7,7 @@ use App\Penjualan;
 use App\Stok;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use PDF;
 
 class PenjualanController extends Controller
 {
@@ -15,6 +16,19 @@ class PenjualanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+     public function pdf(Request $request)
+     {
+      $id = Auth::id();
+     	$penjualan = Penjualan::where('user_id', '=', $id)
+      ->orWhere(DB::raw("DATE_FORMAT(created_at, '%Y-%m') = $request->periode"))
+      ->get();
+      $users = Auth::user();
+      
+     	$pdf = PDF::loadview('penjualan_pdf', ['penjualan'=>$penjualan, 'users' => $users]);
+     	return $pdf->stream();
+     }
+
     public function index()
     {
       $id = Auth::id();
@@ -132,6 +146,11 @@ class PenjualanController extends Controller
     {
         //
     }
+
+
+
+
+
 
     // public function route()
     // {

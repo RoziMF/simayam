@@ -109,6 +109,29 @@
           <!-- /.box -->
         </div>
       </div>
+      <form class="form-horizontal" method="get" action="{{route('pdforder')}}">
+        @csrf
+
+              <div class="box-body" >
+                <div class="row col-sm-12">
+
+                <div class="form-group">
+                  <label for="inputharga" class="col-sm-2 control-label">Periode</label>
+
+                  <div class="col-sm-4">
+                    <input type="text" class="form-control" name="periode" placeholder="YYYY-MM" required>
+                  </div>
+
+                  <button type="submit" class="btn btn-primary pull-right">CETAK</button>
+                </div>
+
+                </div>
+
+              <!-- /.box-body -->
+
+              <!-- /.box-footer -->
+              </div>
+            </form>
       @endif
 
     </div>
