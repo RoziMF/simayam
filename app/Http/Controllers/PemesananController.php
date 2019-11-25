@@ -22,8 +22,9 @@ class PemesananController extends Controller
      {
        $periode = $request->periode;
        $dateString = date('Y-m', strtotime($periode));
-     	 $pemesanan = Pemesanan::where(DB::raw("DATE_FORMAT(created_at, '%Y-%m') = $dateString"))
-      ->get();
+     	//  $pemesanan = Pemesanan::where(DB::raw("DATE_FORMAT(created_at, '%Y-%m') = $dateString"))
+      // ->get();
+      $pemesanan = Pemesanan::all();
 
      	$pdf = PDF::loadview('pemesanan_pdf', ['pemesanan'=>$pemesanan, 'periode'=>$periode]);
      	return $pdf->stream();

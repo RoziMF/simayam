@@ -215,80 +215,16 @@
 <script src="{{ url('/') }}/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{ url('/') }}/dist/js/demo.js"></script>
+
 <script>
   $(document).ready(function () {
     $('.sidebar-menu').tree()
   });
 
-//CHAAARTTT
 
-        var url = "{{url('peramalan/store')}}";
-        var labels = new Array();
-        var peramalan = new Array();
-        var aktual = new Array();
-        var alpha = new Array();
-        $(document).ready(function(){
-          $.get(url, function(response){
-            response.forEach(function(data){
-                labels.push(data.periode);
-                peramalan.push(data.peramalan);
-                aktual.push(data.aktual);
-                alpha.push(data.alpha);
-            });
-            var ctx = document.getElementById("lineChart").getContext('2d');
-            var ctx = document.getElementById("lineChart2").getContext('2d');
-                var myChart = new Chart(ctx, {
-                  type: 'line',
-                  data: {
-                      labels:labels,
-                      datasets: [{
-                        label: 'peramalan',
-                        borderColor: '#13ce66',
-                        pointBackgroundColor: 'white',
-                        borderWidth: 2,
-                        pointBorderColor: '#13ce66',
-                        backgroundColor: 'transparent',
-                        data: peramalan
-                      },
-                      {
-                        label: 'aktual',
-                        borderColor: '#13ce66',
-                        pointBackgroundColor: 'white',
-                        borderWidth: 2,
-                        pointBorderColor: '#13ce66',
-                        backgroundColor: 'transparent',
-                        data: aktual
-                      }]
-                  },
-                      options: {
-                          scales: {
-                              yAxes: [{
-                                  ticks: {
-                                      beginAtZero: true
-                                  },
-                                  gridLines: {
-                                      display: true
-                                  }
-                              }],
-                              xAxes: [{
-                                  gridLines: {
-                                      display: false
-                                  }
-                              }]
-                          },
-                          bodyFontFamily: 'Circular Family',
-                          footerFontFamily: 'Circular Family',
-                          legend: {
-                              display: false
-                          },
-                          responsive: true,
-                          maintainAspectRatio: false
-                      }
-                  });
-          });
+@yield('script')
 
-                  
-        });
+
 </script>
 </body>
 </html>

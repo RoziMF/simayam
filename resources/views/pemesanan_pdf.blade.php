@@ -39,7 +39,7 @@
 				<td>{{$value->user->name}}</td>
 				<td>{{$value->alamat}}</td>
 				<td>{{$value->created_at}}</td>
-				<td>{{$value->tglpengambilan}}</td>
+				<td>{{$value->tglkirim}}</td>
 				<td>{{$value->kuantitas}}</td>
 				<td>@currency($value->harga)</td>
         <td>@currency($value->kuantitas*$value->harga)</td>

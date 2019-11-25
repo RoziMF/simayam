@@ -93,13 +93,40 @@ class PeramalanController extends Controller
           }
       }
 
+      $p = array();
+      for ($i = 0; $i <= count($periode); $i++) {
+          if ($i < count($periode)) {
+              $p[$i] = $periode[$i];
+          } else {
+              $nextPeriode = date('Y-m', strtotime("+1 month", strtotime(date($request->to))));
+              $p[$i] = $nextPeriode;
+          }
+      }
+
+      $forcast = array();
+      for ($i = 0; $i <= count($periode); $i++) {
+          if ($i < count($periode)) {
+              $forcast[$i] =$F[$bestBetaIndex][$i];
+          } else {
+              $forcast[$i] = $F[$bestBetaIndex][$i];
+          }
+      }
+
+      $aktual = array();
+      for ($i = 0; $i <= count($periode); $i++) {
+          if ($i < count($periode)) {
+              $aktual[$i] = $X[$i];
+          } else {
+              $aktual[$i] = 0;
+          }
+      }
       // $request->produk_id == null ? $produk = '' : $produk = Produk::where('id', $request->produk_id)->with('jenis')->with('satuanPembelian')->with('satuanPenjualan')->first();
 
-      $peramalan = ['hasil' => $hasil, 'beta' => $beta[$bestBetaIndex], 'mape' => $MAPE[$bestBetaIndex]];
+      // $peramalan = ['hasil' => $hasil, 'beta' => $beta[$bestBetaIndex], 'mape' => $MAPE[$bestBetaIndex]];
       // $peramalan = ['hasil' => $hasil, 'beta' => $beta[$bestBetaIndex], 'mape' => $MAPE[$bestBetaIndex], 'produk' => $produk];
 
-      return response()->json($peramalan) ;
-
+      // return response()->json($peramalan) ;
+      return view('grafik', ['p' => $p, 'forcast'=>$forcast, 'aktual'=>$aktual, 'beta' => $beta[$bestBetaIndex], 'mape' => $MAPE[$bestBetaIndex]]);
 
   }
 
@@ -185,11 +212,40 @@ class PeramalanController extends Controller
           }
       }
 
+      $p = array();
+      for ($i = 0; $i <= count($periode); $i++) {
+          if ($i < count($periode)) {
+              $p[$i] = $periode[$i];
+          } else {
+              $nextPeriode = date('Y-m', strtotime("+1 month", strtotime(date($request->to))));
+              $p[$i] = $nextPeriode;
+          }
+      }
+
+      $forcast = array();
+      for ($i = 0; $i <= count($periode); $i++) {
+          if ($i < count($periode)) {
+              $forcast[$i] =$F[$bestBetaIndex][$i];
+          } else {
+              $forcast[$i] = $F[$bestBetaIndex][$i];
+          }
+      }
+
+      $aktual = array();
+      for ($i = 0; $i <= count($periode); $i++) {
+          if ($i < count($periode)) {
+              $aktual[$i] = $X[$i];
+          } else {
+              $aktual[$i] = 0;
+          }
+      }
+
       // $request->produk_id == null ? $produk = '' : $produk = Produk::where('id', $request->produk_id)->with('jenis')->with('satuanPembelian')->with('satuanPenjualan')->first();
 
-      $peramalan = ['hasil' => $hasil, 'beta' => $beta[$bestBetaIndex], 'mape' => $MAPE[$bestBetaIndex]];
+      // $peramalan = ['hasil' => $hasil, 'beta' => $beta[$bestBetaIndex], 'mape' => $MAPE[$bestBetaIndex]];
       // $peramalan = ['hasil' => $hasil, 'beta' => $beta[$bestBetaIndex], 'mape' => $MAPE[$bestBetaIndex], 'produk' => $produk];
 
-      return response()->json($peramalan);
+      // return response()->json($peramalan);
+      return view('grafik', ['p' => $p, 'forcast'=>$forcast, 'aktual'=>$aktual, 'beta' => $beta[$bestBetaIndex], 'mape' => $MAPE[$bestBetaIndex]]);
   }
 }
