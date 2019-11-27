@@ -105,39 +105,39 @@
               </table>
             </div>
             <!-- /.box-body -->
+
+            <form class="form-horizontal" method="get" action="{{route('pdforder')}}">
+              @csrf
+
+
+                      <div class="form-group">
+                        <label for="inputharga" class="col-xs-1 control-label">Dari</label>
+
+                        <div class="col-sm-3">
+                          <input type="date" class="form-control" name="dari">
+                        </div>
+
+                        <label for="inputharga" class="col-xs-1 control-label">Sampai</label>
+
+                        <div class="col-sm-3">
+                          <input type="date" class="form-control" name="sampai">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary col-xs-1">CETAK</button>
+                      </div>
+
+
+                  </form>
+
           </div>
           <!-- /.box -->
+
         </div>
+
+
+
       </div>
-      <form class="form-horizontal" method="get" action="{{route('pdforder')}}">
-        @csrf
 
-              <div class="box-body" >
-                <div class="row col-sm-12">
-
-                <div class="form-group">
-                  <label for="inputharga" class="col-sm-2 control-label">Dari</label>
-
-                  <div class="col-sm-6">
-                    <input type="date" class="form-control" name="dari">
-                  </div>
-
-                  <label for="inputharga" class="col-sm-2 control-label">Sampai</label>
-
-                  <div class="col-sm-6">
-                    <input type="date" class="form-control" name="sampai">
-                  </div>
-
-                  <button type="submit" class="btn btn-primary pull-right">CETAK</button>
-                </div>
-
-                </div>
-
-              <!-- /.box-body -->
-
-              <!-- /.box-footer -->
-              </div>
-            </form>
       @endif
 
     </div>

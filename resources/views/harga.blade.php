@@ -32,7 +32,7 @@
 
                 @foreach($harga as $key=>$value)
                 <tr>
-                  <td>{{$value->harga}}</td>
+                  <td>@currency($value->harga)</td>
                   <td><a href="{{ route('harga.edit', $value->id)}}" class="btn btn-warning">Edit</a></td>
                 @endforeach
               </table>

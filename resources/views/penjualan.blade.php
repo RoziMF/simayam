@@ -67,31 +67,23 @@
               <form class="form-horizontal" method="get" action="{{route('pdf')}}">
                 @csrf
 
-                      <div class="box-body" >
-                        <div class="row col-sm-12">
 
                         <div class="form-group">
-                          <label for="inputharga" class="col-sm-2 control-label">Dari</label>
+                          <label for="inputharga" class="col-sm-1 control-label">Dari</label>
 
-                          <div class="col-sm-6">
+                          <div class="col-sm-3">
                             <input type="date" class="form-control" name="dari">
                           </div>
 
-                          <label for="inputharga" class="col-sm-2 control-label">Sampai</label>
+                          <label for="inputharga" class="col-sm-1 control-label">Sampai</label>
 
-                          <div class="col-sm-6">
+                          <div class="col-sm-3">
                             <input type="date" class="form-control" name="sampai">
                           </div>
 
-                          <button type="submit" class="btn btn-primary pull-right">CETAK</button>
+                          <button type="submit" class="btn btn-primary col-sm-1">CETAK</button>
                         </div>
 
-                        </div>
-
-                      <!-- /.box-body -->
-
-                      <!-- /.box-footer -->
-                      </div>
                     </form>
               <!-- <a href="{{route('pdf')}}" class="pull-right btn btn-primary">CETAK</a> -->
             </div>
