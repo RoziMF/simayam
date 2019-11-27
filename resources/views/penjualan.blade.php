@@ -71,10 +71,16 @@
                         <div class="row col-sm-12">
 
                         <div class="form-group">
-                          <label for="inputharga" class="col-sm-2 control-label">Periode</label>
+                          <label for="inputharga" class="col-sm-2 control-label">Dari</label>
 
-                          <div class="col-sm-4">
-                            <input type="text" class="form-control" name="periode" placeholder="YYYY-MM" required>
+                          <div class="col-sm-6">
+                            <input type="date" class="form-control" name="dari">
+                          </div>
+
+                          <label for="inputharga" class="col-sm-2 control-label">Sampai</label>
+
+                          <div class="col-sm-6">
+                            <input type="date" class="form-control" name="sampai">
                           </div>
 
                           <button type="submit" class="btn btn-primary pull-right">CETAK</button>

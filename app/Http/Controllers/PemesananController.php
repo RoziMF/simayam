@@ -20,13 +20,14 @@ class PemesananController extends Controller
 
      public function pdf(Request $request)
      {
-       $periode = $request->periode;
-       $dateString = date('Y-m', strtotime($periode));
-     	//  $pemesanan = Pemesanan::where(DB::raw("DATE_FORMAT(created_at, '%Y-%m') = $dateString"))
-      // ->get();
-      $pemesanan = Pemesanan::all();
+       $dari = $request->dari;
+       $sampai = $request->sampai;
+       // $dateString = date('Y-m', strtotime($periode));
+     	 $pemesanan = Pemesanan::where('created_at', '>=', $dari, 'and', '<=', $sampai )
+      ->get();
+      // $pemesanan = Pemesanan::all();
 
-     	$pdf = PDF::loadview('pemesanan_pdf', ['pemesanan'=>$pemesanan, 'periode'=>$periode]);
+     	$pdf = PDF::loadview('pemesanan_pdf', ['pemesanan'=>$pemesanan, 'dari'=>$dari]);
      	return $pdf->stream();
      }
 

@@ -11,9 +11,7 @@
 		}
 	</style>
 	<center>
-		<h5>Laporan Pemesanan <br>
-				Periode {{$periode}}
-		</h5>
+		<h5>Laporan Pemesanan {{$dari}}</h5>
 	</center>
 
   <br>

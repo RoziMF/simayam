@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Penjualan;
 use App\Pemesanan;
+// use App\Charts\PeramalanChart;
+use Charts;
 
 class PeramalanController extends Controller
 {
@@ -126,7 +128,22 @@ class PeramalanController extends Controller
       // $peramalan = ['hasil' => $hasil, 'beta' => $beta[$bestBetaIndex], 'mape' => $MAPE[$bestBetaIndex], 'produk' => $produk];
 
       // return response()->json($peramalan) ;
-      return view('grafik', ['p' => $p, 'forcast'=>$forcast, 'aktual'=>$aktual, 'beta' => $beta[$bestBetaIndex], 'mape' => $MAPE[$bestBetaIndex]]);
+
+      $line = Charts::multi('areaspline', 'highcharts')
+      ->title('Grafik Peramalan Penjualan Ayam')
+      ->colors(['#ff0000', '#0019ff'])
+      ->labels($p)
+      ->dataset('Aktual', $aktual)
+      ->dataset('Peramalan', $forcast);
+
+      $err = Charts::create('pie', 'highcharts')
+      ->title('Persentase Keakuratan Peramalan')
+      ->labels(['Kesalahan', 'Keakuratan'])
+      ->values([$MAPE[$i],100-$MAPE[$i]])
+      ->dimensions(1000,500)
+      ->responsive(false);
+
+      return view('grafik', ['err' => $err, 'line' => $line, 'beta' => $beta[$bestBetaIndex], 'mape' => $MAPE[$bestBetaIndex]]);
 
   }
 
@@ -240,12 +257,30 @@ class PeramalanController extends Controller
           }
       }
 
+
+
       // $request->produk_id == null ? $produk = '' : $produk = Produk::where('id', $request->produk_id)->with('jenis')->with('satuanPembelian')->with('satuanPenjualan')->first();
 
       // $peramalan = ['hasil' => $hasil, 'beta' => $beta[$bestBetaIndex], 'mape' => $MAPE[$bestBetaIndex]];
       // $peramalan = ['hasil' => $hasil, 'beta' => $beta[$bestBetaIndex], 'mape' => $MAPE[$bestBetaIndex], 'produk' => $produk];
 
       // return response()->json($peramalan);
-      return view('grafik', ['p' => $p, 'forcast'=>$forcast, 'aktual'=>$aktual, 'beta' => $beta[$bestBetaIndex], 'mape' => $MAPE[$bestBetaIndex]]);
+
+    $line = Charts::multi('areaspline', 'highcharts')
+    ->title('Grafik Peramalan Pemesanan Ayam')
+    ->colors(['#ff0000', '#0019ff'])
+    ->labels($p)
+    ->dataset('Aktual', $aktual)
+    ->dataset('Peramalan', $forcast);
+
+    $err = Charts::create('pie', 'highcharts')
+    ->title('Persentase Keakuratan Peramalan')
+    ->labels(['Kesalahan', 'Keakuratan'])
+    ->values([$MAPE[$i],100-$MAPE[$i]])
+    ->dimensions(1000,500)
+    ->responsive(false);
+
+
+      return view('grafik', ['beta' => $beta[$bestBetaIndex], 'mape' => $MAPE[$bestBetaIndex], 'line' => $line, 'err' => $err]);
   }
 }

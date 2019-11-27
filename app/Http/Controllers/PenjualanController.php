@@ -20,11 +20,14 @@ class PenjualanController extends Controller
      public function pdf(Request $request)
      {
       $id = Auth::id();
+      $dari = $request->dari;
+      $sampai = $request->sampai;
+
      	$penjualan = Penjualan::where('user_id', '=', $id)
-      ->orWhere(DB::raw("DATE_FORMAT(created_at, '%Y-%m') = $request->periode"))
+      ->where('created_at', '>=', $dari, 'and', '<=', $sampai)
       ->get();
       $users = Auth::user();
-      
+
      	$pdf = PDF::loadview('penjualan_pdf', ['penjualan'=>$penjualan, 'users' => $users]);
      	return $pdf->stream();
      }
